@@ -39,8 +39,11 @@ LOCAL_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 WSGI_APPLICATION = "{}.wsgi.application".format(PROJECT_NAME)
 
-ALLOWED_HOSTS = ['localhost', 'django'] if os.getenv('ALLOWED_HOSTS') is None \
-    else re.split(r' *[,|:|;] *', os.getenv('ALLOWED_HOSTS'))
+try:
+    ALLOWED_HOSTS = ast.literal_eval(os.getenv('ALLOWED_HOSTS'))
+except:
+    ALLOWED_HOSTS = ['localhost', 'django'] if os.getenv('ALLOWED_HOSTS') is None \
+        else [h.strip('"\'') for h in re.split(r' *[,|:|;] *', os.getenv('ALLOWED_HOSTS'))]
 
 PROXY_ALLOWED_HOSTS += ('nominatim.openstreetmap.org',)
 
