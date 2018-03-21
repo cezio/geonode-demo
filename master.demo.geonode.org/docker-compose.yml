@@ -2,7 +2,7 @@ version: '2.2'
 services:
 
   db:
-    image: geosolutions-it/postgis-docker:9.6
+    image: geosolutionsit/postgis-docker:9.6
     restart: unless-stopped
     container_name: db4${COMPOSE_PROJECT_NAME}
     stdin_open: true
@@ -58,7 +58,7 @@ services:
       - ./scripts/docker/env/production/django.env
 
   geoserver:
-    image: geosolutions-it/geoserver-docker:2.12.x
+    image: geosolutionsit/geoserver-docker:2.12.x
     restart: unless-stopped
     container_name: geoserver4${COMPOSE_PROJECT_NAME}
     stdin_open: true
@@ -76,7 +76,7 @@ services:
       - ./scripts/docker/env/production/geoserver.env
 
   geonode:
-    image: geosolutions-it/nginx-geonode:latest
+    image: geosolutionsit/nginx-geonode:latest
     restart: unless-stopped
     container_name: nginx4${COMPOSE_PROJECT_NAME}
     stdin_open: true
@@ -132,7 +132,7 @@ services:
       - ./scripts/docker/env/production/django.env
 
   data-dir-conf:
-    image: geosolutions-it/geoserver_data:2.12.x
+    image: geosolutionsit/geoserver_data:2.12.x
     restart: on-failure
     container_name: gsconf4${COMPOSE_PROJECT_NAME}
     labels:
