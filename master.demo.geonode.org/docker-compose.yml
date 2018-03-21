@@ -87,8 +87,9 @@ services:
     depends_on:
       - django
       - geoserver
-    ports:
-      - "80:80"
+    # set in docker-compose.override.yml
+    # ports:
+    #   - "80:80"
     volumes:
       - statics:/mnt/volumes/statics
 
