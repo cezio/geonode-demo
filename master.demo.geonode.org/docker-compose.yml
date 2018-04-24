@@ -10,6 +10,7 @@ services:
     labels:
         org.geonode.component: db
         org.geonode.instance.name: geonode
+        org.geonode.deployment.name: ${COMPOSE_PROJECT_NAME}
     volumes:
       - dbdata:/var/lib/postgresql/data
       - dbbackups:/pg_backups
@@ -25,6 +26,7 @@ services:
     labels:
         org.geonode.component: elasticsearch
         org.geonode.instance.name: geonode
+        org.geonode.deployment.name: ${COMPOSE_PROJECT_NAME}
 
   rabbitmq:
     image: rabbitmq
@@ -35,6 +37,7 @@ services:
     labels:
         org.geonode.component: rabbitmq
         org.geonode.instance.name: geonode
+        org.geonode.deployment.name: ${COMPOSE_PROJECT_NAME}
 
   django:
     restart: unless-stopped
@@ -46,6 +49,7 @@ services:
     labels:
         org.geonode.component: django
         org.geonode.instance.name: geonode
+        org.geonode.deployment.name: ${COMPOSE_PROJECT_NAME}
     depends_on:
       - db
       - elasticsearch
@@ -66,6 +70,7 @@ services:
     labels:
         org.geonode.component: geoserver
         org.geonode.instance.name: geonode
+        org.geonode.deployment.name: ${COMPOSE_PROJECT_NAME}
     depends_on:
       - db
       - data-dir-conf
@@ -84,6 +89,7 @@ services:
     labels:
         org.geonode.component: nginx
         org.geonode.instance.name: geonode
+        org.geonode.deployment.name: ${COMPOSE_PROJECT_NAME}
     depends_on:
       - django
       - geoserver
@@ -102,11 +108,12 @@ services:
     labels:
         org.geonode.component: celery
         org.geonode.instance.name: geonode
+        org.geonode.deployment.name: ${COMPOSE_PROJECT_NAME}
     depends_on:
       - db
       - elasticsearch
       - rabbitmq
-    command: celery worker --app=geonode.celery_app:app -B -l INFO
+    command: celery worker --app=demo_master.celery_app:app -B -l INFO
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     env_file:
@@ -120,6 +127,7 @@ services:
     # tty: true
     labels:
         org.geonode.component: consumers
+        org.geonode.deployment.name: ${COMPOSE_PROJECT_NAME}
         org.geonode.instance.name: geonode
     depends_on:
       - rabbitmq
@@ -138,9 +146,28 @@ services:
     labels:
         org.geonode.component: conf
         org.geonode.instance.name: geonode
+        org.geonode.deployment.name: ${COMPOSE_PROJECT_NAME}
     command: /bin/true
     volumes:
       - geoserver-data-dir:/geoserver_data/data
+
+  backup:
+    build: scripts/docker/backup/
+    restart: unless-stopped
+    container_name: backup4${COMPOSE_PROJECT_NAME}
+    stdin_open: true
+    labels:
+        org.geonode.component: backup
+        org.geonode.instance.name: geonode
+        org.geonode.deployment.name: ${COMPOSE_PROJECT_NAME}
+    depends_on:
+      - rabbitmq
+      - elasticsearch
+      - django
+      - db
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - dbbackups:/mnt/volumes/backups/
 
 volumes:
 

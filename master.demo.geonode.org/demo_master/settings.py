@@ -62,7 +62,7 @@ MANAGERS = ADMINS = os.getenv('ADMINS', [])
 TIME_ZONE = os.getenv('TIME_ZONE', "America/Chicago")
 USE_TZ = True
 
-INSTALLED_APPS += ('geonode', PROJECT_NAME,)
+INSTALLED_APPS += (PROJECT_NAME,)
 
 # Location of url mappings
 ROOT_URLCONF = os.getenv('ROOT_URLCONF', '{}.urls'.format(PROJECT_NAME))
@@ -368,10 +368,6 @@ LOGGING = {
         }
     },
     'handlers': {
-        'null': {
-            'level': 'INFO',
-            'class': 'django.utils.log.NullHandler',
-        },
         'console': {
             'level': 'INFO',
             'class': 'logging.StreamHandler',

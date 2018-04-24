@@ -15,15 +15,17 @@ echo GEOSERVER_PUBLIC_LOCATION=$GEOSERVER_PUBLIC_LOCATION
 
 echo "waitfordbs task done"
 
-echo "running migrations"
-/usr/local/bin/invoke migrations
-/usr/local/bin/invoke statics
+if [ 'true' != ${IS_CELERY} ]; then
+    echo "running migrations"
+    /usr/local/bin/invoke migrations
+    /usr/local/bin/invoke statics
+    echo "migrations task done"
+    /usr/local/bin/invoke prepare
+    echo "prepare task done"
+    /usr/local/bin/invoke fixtures
+    echo "fixture task done"
+fi;
 
-echo "migrations task done"
-/usr/local/bin/invoke prepare
-echo "prepare task done"
-/usr/local/bin/invoke fixtures
-echo "fixture task done"
 
 cmd="$@"
 
@@ -50,5 +52,5 @@ else
     fi
 
 fi
-echo 'got command ${cmd}'
+echo "got command ${cmd}"
 exec $cmd
