@@ -26,31 +26,7 @@ if [ 'true' != ${IS_CELERY} ]; then
     echo "fixture task done"
 fi;
 
-
-cmd="$@"
-
 echo DOCKER_ENV=$DOCKER_ENV
 
-if [ -z ${DOCKER_ENV} ] || [ ${DOCKER_ENV} = "development" ]
-then
-
-    echo "Executing standard Django server $cmd for Development"
-
-else
-
-    if [ ${IS_CELERY} = "true" ]
-    then
-
-        cmd=$CELERY_CMD
-        echo "Executing Celery server $cmd for Production"
-
-    else
-
-        cmd=$UWSGI_CMD
-        echo "Executing UWSGI server $cmd for Production"
-
-    fi
-
-fi
-echo "got command ${cmd}"
-exec $cmd
+echo "got command ${CMD}"
+exec $CMD

@@ -9,9 +9,5 @@ else
     DUMP_DIR_DEST=${1}
 fi;
 
-python manage.py loaddata ${DUMP_DIR_DEST}/monitoring.json
-python manage.py loaddata ${DUMP_DIR_DEST}/auth.json
-touch ${DUMP_TEST_FILE}
-
 # recreate and restart nodes
-python $THIS_DIR/manage_node.py
+python $THIS_DIR/manage_node.py load ${DUMP_DIR_DEST}

@@ -15,7 +15,7 @@ crontab -l | grep -i backup > /dev/null
 has_backup=$?
 
 if [ ! 0 -eq $has_backup ]; then
-    crontab < ${THIS_DIR}/crontab
+    crontab ${THIS_DIR}/crontab
     rm -f ${THIS_DIR}/crontab
 fi;
 
@@ -36,5 +36,5 @@ then
 else
     cmd="/usr/sbin/cron -f"
 fi
-echo 'got command ${cmd}'
+echo "got command ${cmd}"
 exec $cmd

@@ -54,12 +54,14 @@ services:
       - db
       - elasticsearch
       - rabbitmq
-    command: uwsgi --ini /usr/src/app/uwsgi.ini
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - statics:/mnt/volumes/statics
     env_file:
       - ./scripts/docker/env/production/django.env
+    environment:
+      CMD: uwsgi --ini /usr/src/app/uwsgi.ini
+
 
   geoserver:
     image: geosolutionsit/geoserver-docker:2.12.x
@@ -94,8 +96,8 @@ services:
       - django
       - geoserver
     # set in docker-compose.override.yml
-    # ports:
-    #   - "80:80"
+    ports:
+       - "8090:80"
     volumes:
       - statics:/mnt/volumes/statics
 
@@ -113,11 +115,13 @@ services:
       - db
       - elasticsearch
       - rabbitmq
-    command: celery worker --app=demo_master.celery_app:app -B -l INFO
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     env_file:
       - ./scripts/docker/env/production/celery.env
+    environment:
+      CMD: celery worker --app=demo_master.celeryapp:app -B -l INFO
+
 
   consumers:
     build: .
@@ -133,11 +137,15 @@ services:
       - rabbitmq
       - db
       - elasticsearch
-    command: python manage.py runmessaging
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     env_file:
       - ./scripts/docker/env/production/django.env
+    environment:
+      CMD: python manage.py runmessaging
+      # we set this to avoid duplicate migration applying
+      IS_CELERY: 'true'
+    
 
   data-dir-conf:
     image: geosolutionsit/geoserver_data:2.12.x
@@ -156,10 +164,13 @@ services:
     restart: unless-stopped
     container_name: backup4${COMPOSE_PROJECT_NAME}
     stdin_open: true
+    command: /usr/sbin/cron -f
     labels:
         org.geonode.component: backup
         org.geonode.instance.name: geonode
         org.geonode.deployment.name: ${COMPOSE_PROJECT_NAME}
+    environment:
+       DOCKER_ENV: 'production'
     depends_on:
       - rabbitmq
       - elasticsearch
