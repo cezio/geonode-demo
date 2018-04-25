@@ -22,7 +22,7 @@ fi;
 rm ${DUMP_TEST_FILE} > /dev/null
 restore_marker=$?
 
-if [ -f ${DUMP_TEST_FILE} ]; then
+if [ $restore_marker = 0 ]; then
     ${THIS_DIR}/restore.sh "${DUMP_DIR_DEST}"
 fi;
 

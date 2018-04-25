@@ -7,11 +7,13 @@ import docker
 
 DEPLOYMENT_LABEL = 'org.geonode.deployment.name'
 
-def rebuild_containers(client, containers):
-    pass
 
-def restart_containers(client, containers):
-    pass
+def restart_containers(client, containers, this_host):
+    for c in containers:
+        if this_host == c.name:
+            continue
+        print('restarting {}:{}'.format(c.id, c.name))
+        c.restart()
 
 
 def get_containers(client, host):
@@ -30,8 +32,7 @@ def cmd_restart(client, host):
     Restart containers from deployment
     """
     containers = get_containers(client, host)
-    rebuild_containers(client, containers)
-    restart_containers(client, containers)
+    restart_containers(client, containers, host)
 
     
 def cmd_list(client, host):

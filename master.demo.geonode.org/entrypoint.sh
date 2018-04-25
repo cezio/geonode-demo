@@ -22,8 +22,11 @@ if [ 'true' != ${IS_CELERY} ]; then
     echo "migrations task done"
     /usr/local/bin/invoke prepare
     echo "prepare task done"
-    /usr/local/bin/invoke fixtures
-    echo "fixture task done"
+    # load fixtures only if there's no auth data
+    if [ (python manage.py dumpdata auth | grep -i admin) -eq 1 ]; then 
+        /usr/local/bin/invoke fixtures
+        echo "fixture task done"
+    fi;
 fi;
 
 echo DOCKER_ENV=$DOCKER_ENV
