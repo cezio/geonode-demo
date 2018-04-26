@@ -12,5 +12,5 @@ python $THIS_DIR/manage_node.py dump $DUMP_DIR_DEST
 #python manage.py dumpdata auth profiles > ${DUMP_DIR_DEST}/auth.json
 touch ${DUMP_TEST_FILE}
 
-# recreate and restart nodes
-python $THIS_DIR/manage_node.py restart
+DO_RESTART="true" ${THIS_DIR}/restore.sh "${DUMP_DIR_DEST}"
+

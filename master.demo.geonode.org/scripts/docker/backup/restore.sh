@@ -12,12 +12,14 @@ fi;
 # recreate and restart nodes
 
 rm -fr /mnt/volumes/statics/*
-rm -fr /mnt/volumes/geoserver-data/
+#rm -fr /geoserver_data/data/*
 #rm -fr /mnt/volumes/pg-data/*
 
 #echo "drop database ${GEONODE_DATABASE}" | psql -U postgres -h db 
 #echo "drop database ${GEONODE_DATABASE_DATA}" | psql -U postgres -h db 
 
+if [ ${DO_RESTART} == "true" ]; then
+    python $THIS_DIR/manage_node.py restart
+fi;
 
-python $THIS_DIR/manage_node.py restart ${DUMP_DIR_DEST}
 python $THIS_DIR/manage_node.py restore ${DUMP_DIR_DEST}

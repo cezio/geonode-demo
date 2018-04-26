@@ -23,7 +23,7 @@ rm ${DUMP_TEST_FILE} > /dev/null
 restore_marker=$?
 
 if [ $restore_marker = 0 ]; then
-    ${THIS_DIR}/restore.sh "${DUMP_DIR_DEST}"
+    DO_RESTART="false" ${THIS_DIR}/restore.sh "${DUMP_DIR_DEST}"
 fi;
 
 cmd="$@"

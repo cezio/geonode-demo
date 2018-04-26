@@ -183,7 +183,7 @@ services:
       - dbbackups:/mnt/volumes/backups/
       - statics:/mnt/volumes/statics/
       #- dbdata:/mnt/volumes/pgdata/
-      - geoserver-data-dir:/mnt/volumes/geoserver-data/
+      - geoserver-data-dir:/geoserver_data/data
 
 volumes:
 

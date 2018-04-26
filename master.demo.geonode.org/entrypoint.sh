@@ -23,12 +23,16 @@ if [ 'true' != ${IS_CELERY} ]; then
     /usr/local/bin/invoke prepare
     echo "prepare task done"
     # load fixtures only if there's no auth data
-    if [ (python manage.py dumpdata auth | grep -i admin) -eq 1 ]; then 
+    set +e
+    python manage.py dumpdata auth | grep -i admin > /dev/null
+    has_fixtures=$?
+    if [ $has_fixtures -eq 1 ]; then 
         /usr/local/bin/invoke fixtures
         echo "fixture task done"
     fi;
 fi;
 
+set -e
 echo DOCKER_ENV=$DOCKER_ENV
 
 echo "got command ${CMD}"
