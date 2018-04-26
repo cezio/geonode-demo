@@ -97,8 +97,8 @@ services:
       - django
       - geoserver
     # set in docker-compose.override.yml
-    ports:
-       - "8090:80"
+    #ports:
+    #   - "80:80"
     volumes:
       - statics:/mnt/volumes/statics
 
@@ -159,30 +159,6 @@ services:
         org.geonode.deployment.name: ${COMPOSE_PROJECT_NAME}
     command: /bin/true
     volumes:
-      - geoserver-data-dir:/geoserver_data/data
-
-  backup:
-    build: scripts/docker/backup/
-    restart: unless-stopped
-    container_name: backup4${COMPOSE_PROJECT_NAME}
-    stdin_open: true
-    command: /usr/sbin/cron -f
-    labels:
-        org.geonode.component: backup
-        org.geonode.instance.name: geonode
-        org.geonode.deployment.name: ${COMPOSE_PROJECT_NAME}
-    env_file:
-      - ./scripts/docker/env/production/django.env
-    depends_on:
-      - rabbitmq
-      - elasticsearch
-      - django
-      - db
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - dbbackups:/mnt/volumes/backups/
-      - statics:/mnt/volumes/statics/
-      #- dbdata:/mnt/volumes/pgdata/
       - geoserver-data-dir:/geoserver_data/data
 
 volumes:

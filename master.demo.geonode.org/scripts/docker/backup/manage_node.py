@@ -10,6 +10,7 @@ DEPLOYMENT_LABEL = 'org.geonode.deployment.name'
 
 def restart_containers(client, containers, this_host):
     for c in containers:
+        print('container', c.name, c.id)
         if this_host == c.name:
             continue
         print('restarting {}:{}'.format(c.id, c.name))
