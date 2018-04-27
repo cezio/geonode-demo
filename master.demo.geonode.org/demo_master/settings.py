@@ -338,58 +338,8 @@ NOTIFICATIONS_MODULE = 'pinax.notifications'
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-MONITORING_ENABLED = False
-# add following lines to your local settings to enable monitoring
-if MONITORING_ENABLED:
-    INSTALLED_APPS += ('geonode.contrib.monitoring',)
-    MIDDLEWARE_CLASSES += ('geonode.contrib.monitoring.middleware.MonitoringMiddleware',)
-    MONITORING_CONFIG = None
-    MONITORING_HOST_NAME = 'localhost'
-    MONITORING_SERVICE_NAME = 'local-geonode'
-    MONITORING_HOST_NAME = SITE_HOST_NAME
 
-GEOIP_PATH = os.path.join(os.path.dirname(__file__), '..', 'GeoLiteCity.dat')
+MONITORING_HOST_NAME = os.getenv("MONITORING_HOST_NAME", hostname)
+MONITORING_SERVICE_NAME = 'geonode'
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': True,
-    'formatters': {
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d '
-                      '%(thread)d %(message)s'
-        },
-        'simple': {
-            'format': '%(message)s',
-        },
-    },
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
-    },
-    'handlers': {
-        'console': {
-            'level': 'INFO',
-            'class': 'logging.StreamHandler',
-            'formatter': 'simple'
-        },
-        'mail_admins': {
-            'level': 'INFO', 'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler',
-        }
-    },
-    "loggers": {
-        "django": {
-            "handlers": ["console"], "level": "INFO", },
-        "geonode": {
-            "handlers": ["console"], "level": "INFO", },
-        "gsconfig.catalog": {
-            "handlers": ["console"], "level": "INFO", },
-        "owslib": {
-            "handlers": ["console"], "level": "INFO", },
-        "pycsw": {
-            "handlers": ["console"], "level": "INFO", },
-        "demo_master": {
-            "handlers": ["console"], "level": "DEBUG", },
-        },
-    }
+GEOIP_PATH = os.getenv('GEOIP_PATH', os.path.join(LOCAL_ROOT, 'GeoIPCities.dat'))
