@@ -33,6 +33,8 @@ PROJECT_NAME = 'demo_master'
 
 SITENAME = 'demo_master'
 
+surl = urlparse(SITEURL)
+hostname = surl.hostname
 # Defines the directory that contains the settings file as the LOCAL_ROOT
 # It is used for relative settings elsewhere.
 LOCAL_ROOT = os.path.abspath(os.path.dirname(__file__))
