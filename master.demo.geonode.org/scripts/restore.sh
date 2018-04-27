@@ -5,7 +5,7 @@ source $(dirname $0)/vars.sh
 # restart compose
 docker-compose up -d
 
-until docker-compose exec ${DB_SERVICE} psql -P pager=off -U postgres -d geonode -c 'select * from people_profile;' > /dev/null ; do
+until docker-compose exec ${GEONODE_SERVICE} ps -aux | grep uwsgi > /dev/null ; do
   sleep 1
 done
 

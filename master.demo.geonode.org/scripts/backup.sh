@@ -22,4 +22,5 @@ docker-compose rm -f ${CONSUMERS_SERVICE}
 docker-compose rm -f ${GEONODE_SERVICE}
 docker-compose rm -f ${GEOSERVER_SERVICE}
 docker-compose rm -f ${GSCONF_SERVICE}
+docker-compose rm -f ${DB_SERVICE}
 docker volume prune -f
