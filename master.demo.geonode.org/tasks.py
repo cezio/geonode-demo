@@ -179,7 +179,12 @@ def _prepare_oauth_fixture():
             "pk": 1001,
             "fields": {
                 "skip_authorization": True,
-                "redirect_uris": "http://{0}:{1}/geoserver/index.html".format(
+                "redirect_uris": """http://{0}:{1}/geoserver/index.html
+http://geonode:80/geoserver/
+http://geonode:80/geoserver
+http://master.demo.geonode.org/geoserver/index.html
+http://master.demo.geonode.org/geoserver/
+http://master.demo.geonode.org/geoserver""".format(
                     pub_ip, pub_port
                 ),
                 "name": "GeoServer",
