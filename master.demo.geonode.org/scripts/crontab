@@ -1,1 +1,1 @@
-2 30 * * 7 /home/geosolutions/work/repo/geonode-demo/master.demo.geonode.org/scripts/do_backup_restore.sh
+30 2 * * 7 /home/geosolutions/work/repo/geonode-demo/master.demo.geonode.org/scripts/do_backup_restore.sh
