@@ -14,6 +14,9 @@ docker cp ${GEONODE_CONTAINER}:/root/monitoring.json $MONITORING_BACKUP_PATH
 docker exec ${GEONODE_CONTAINER} rm /root/auth.json
 docker exec ${GEONODE_CONTAINER} rm /root/monitoring.json
 
+# let's update code base and force rebuild
+source $(dirname $0)/update.sh
+
 # stop containers, remove GS-related containers and volumes
 # here we're wiping all user-uploaded data
 docker-compose stop
