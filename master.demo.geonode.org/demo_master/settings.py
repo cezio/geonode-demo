@@ -109,17 +109,17 @@ ACCOUNT_EMAIL_VERIFICATION = 'optional'
 ACCOUNT_EMAIL_CONFIRMATION_EMAIL = True
 ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = True
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
-ACCOUNT_APPROVAL_REQUIRED = True
+ACCOUNT_APPROVAL_REQUIRED = False
 
 SOCIALACCOUNT_ADAPTER = 'geonode.people.adapters.SocialAccountAdapter'
 
 SOCIALACCOUNT_AUTO_SIGNUP = False
 
 # Uncomment this to enable Linkedin and Facebook login
-# INSTALLED_APPS += (
-#     'allauth.socialaccount.providers.linkedin_oauth2',
-#     'allauth.socialaccount.providers.facebook',
-# )
+INSTALLED_APPS += (
+    'allauth.socialaccount.providers.linkedin_oauth2',
+    'allauth.socialaccount.providers.facebook',
+)
 
 SOCIALACCOUNT_PROVIDERS = {
     'linkedin_oauth2': {
