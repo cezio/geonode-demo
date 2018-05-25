@@ -88,7 +88,6 @@ services:
       PUBLIC_PORT: 80
       DOCKER_HOST_IP:
       NGINX_BASE_URL: http://master.demo.geonode.org/
-      #PROXY_BASE_URL: http://master.demo.geonode.org/geoserver/
 
   geonode:
     image: geosolutionsit/nginx-geonode:latest
