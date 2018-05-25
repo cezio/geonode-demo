@@ -6,7 +6,8 @@ set -x
 # common values
 
 # locate docker-compose.yml file above this dir
-WORKDIR=$(dirname $0)/../
+THIS_DIR=$(dirname $0)
+WORKDIR=${THIS_DIR}/../
 # you can customize backup storage with BACKUP_DIR env var
 _BACKUP_DIR=${BACKUP_DIR:-~/work/geonode/backup/}
 
