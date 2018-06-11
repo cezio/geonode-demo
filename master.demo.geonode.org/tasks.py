@@ -191,6 +191,8 @@ http://master.demo.geonode.org/geoserver""".format(
                 "authorization_grant_type": "authorization-code",
                 "client_type": "confidential",
                 "client_id": "Jrchz2oPY3akmzndmgUTYrs9gczlgoV20YPSvqaV",
+                "created": "2018-01-01 01:00:00",
+                "updated": "2018-01-01 01:00:00",
                 "client_secret": "\
 rCnp5txobUo83EpQEblM8fVj3QT5zb5qRfxNsuPzCqZaiRyIoxM4jdgMiZKFfePBHYXCLd7B8NlkfDB\
 Y9HKeIQPcy5Cp08KQNpRHQbjpLItDHv12GvkSeXp6OxaUETv3",
