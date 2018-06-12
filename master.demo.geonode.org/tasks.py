@@ -89,6 +89,8 @@ def fixtures(ctx):
 --settings={0}".format(_localsettings()), pty=True)
     ctx.run("django-admin.py loaddata /usr/src/geonode/geonode/base/fixtures/initial_data.json \
 --settings={0}".format(_localsettings()), pty=True)
+    if os.path.exists('/mnt/volumes/statics/auth.json'):
+        ctx.run("django-admin.py loaddata /mnt/volumes/statics/auth.json")
 
 
 def _docker_host_ip():

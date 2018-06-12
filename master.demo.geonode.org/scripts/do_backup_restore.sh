@@ -10,8 +10,12 @@ DO_SCRIPT='/bin/bash'
 
 touch $THIS_DIR/marker
 
+# dump data first
 $DO_SCRIPT $THIS_DIR/backup.sh
+# cleanup existing containers/volumes
 $DO_SCRIPT $THIS_DIR/cleanup.sh
+# recreate containers
 $DO_SCRIPT $THIS_DIR/update.sh
+# restore data
 $DO_SCRIPT $THIS_DIR/restore.sh
 

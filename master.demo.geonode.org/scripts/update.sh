@@ -3,11 +3,12 @@
 # include common vars
 source $(dirname $0)/vars.sh
 
-git pull
+git pull || true
 
 CMD="docker-compose build"
 
-if [ ! -n "${CACHED}" ];
+# CACHED controls if we need to do full or fast rebuild
+if [ ! -n "${CACHED}" ]; then
     CMD="${CMD} --no-cache"
 fi;
 

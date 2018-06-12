@@ -4,7 +4,7 @@
 source $(dirname $0)/vars.sh
 
 # dump auth and monitoring in geonode
-docker-compose exec -T ${GEONODE_SERVICE} python manage.py dumpdata auth people.Profile -o  /root/auth.json
+docker-compose exec -T ${GEONODE_SERVICE} python manage.py dumpdata people.Profile -o /root/auth.json
 docker-compose exec -T ${GEONODE_SERVICE} python manage.py dumpdata monitoring -o /root/monitoring.json
 
 
