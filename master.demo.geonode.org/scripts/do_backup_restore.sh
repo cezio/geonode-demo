@@ -9,7 +9,9 @@ THIS_DIR=$(dirname $0)
 DO_SCRIPT='/bin/bash'
 
 touch $THIS_DIR/marker
-#$THIS_DIR/update.sh
+
 $DO_SCRIPT $THIS_DIR/backup.sh
+$DO_SCRIPT $THIS_DIR/cleanup.sh
+$DO_SCRIPT $THIS_DIR/update.sh
 $DO_SCRIPT $THIS_DIR/restore.sh
 

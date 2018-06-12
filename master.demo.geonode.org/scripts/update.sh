@@ -4,4 +4,11 @@
 source $(dirname $0)/vars.sh
 
 git pull
-docker-compose build --no-cache
+
+CMD="docker-compose build"
+
+if [ ! -n "${CACHED}" ];
+    CMD="${CMD} --no-cache"
+fi;
+
+$CMD
