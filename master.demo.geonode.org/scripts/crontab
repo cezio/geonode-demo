@@ -1,1 +1,1 @@
-20 2 * * 7 /home/geosolutions/work/repo/geonode-demo/master.demo.geonode.org/scripts/do_backup_restore.sh > /home/geosolutions/work/logs/cron.log 2>&1
+20 2 * * * /home/geosolutions/work/repo/geonode-demo/master.demo.geonode.org/scripts/do_backup_restore.sh >> /home/geosolutions/work/logs/cron.log 2>&1
