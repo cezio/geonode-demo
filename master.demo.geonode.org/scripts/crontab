@@ -1,1 +1,7 @@
-20 2 * * * /home/geosolutions/work/repo/geonode-demo/master.demo.geonode.org/scripts/do_backup_restore.sh >> /home/geosolutions/work/logs/cron.log 2>&1
+# run daily mon-sat
+20 2 * * 0-5 /home/geosolutions/work/repo/geonode-demo/master.demo.geonode.org/scripts/do_backup_restore.sh >> /home/geosolutions/work/logs/cron.log 2>&1
+# even sun
+20 2 * * 6 test $((10#$(date +\%W)\%2)) -eq 0 && /home/geosolutions/work/repo/geonode-demo/master.demo.geonode.org/scripts/do_backup_restore.sh >> /home/geosolutions/work/logs/cron.log 2>&1
+# odd sun
+20 2 * * 6 test $((10#$(date +\%W)\%2)) -eq 1 && REBUILD=1 /home/geosolutions/work/repo/geonode-demo/master.demo.geonode.org/scripts/do_backup_restore.sh >> /home/geosolutions/work/logs/cron.log 2>&1
+
