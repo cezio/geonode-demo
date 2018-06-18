@@ -10,7 +10,8 @@ CMD="docker-compose build"
 # CACHED controls if we need to do full or fast rebuild
 if [ ! -n "${CACHED}" ]; then
     # do not log build, just errors
-    CMD="${CMD} --no-cache" > /dev/null
+    CMD="${CMD} --no-cache"
 fi;
 
-$CMD
+# discard usual output
+$CMD > /dev/null
