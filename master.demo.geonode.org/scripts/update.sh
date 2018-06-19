@@ -7,8 +7,8 @@ git pull || true
 
 CMD="docker-compose build"
 
-# CACHED controls if we need to do full or fast rebuild
-if [ ! -n "${CACHED}" ]; then
+# REBUILD controls if we need to do full or fast rebuild
+if [ -n "${REBUILD}" ]; then
     # do not log build, just errors
     CMD="${CMD} --no-cache"
 fi;
