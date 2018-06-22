@@ -93,10 +93,10 @@ TEMPLATES[0].pop('APP_DIRS', None)
 
 # If you want to enable Mosaics use the following configuration
 UPLOADER = {
-    'BACKEND': 'geonode.rest',
-    # 'BACKEND': 'geonode.importer',
+    #'BACKEND': 'geonode.rest',
+    'BACKEND': 'geonode.importer',
     'OPTIONS': {
-        'TIME_ENABLED': False,
+        'TIME_ENABLED': True,
         'MOSAIC_ENABLED': False,
         'GEOGIG_ENABLED': False,
     },
