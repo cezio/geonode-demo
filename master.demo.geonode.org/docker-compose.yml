@@ -64,7 +64,7 @@ services:
 
 
   geoserver:
-    image: geosolutionsit/geoserver-docker:2.12.x
+    image: geosolutionsit/geoserver-docker:2.13.x
     restart: unless-stopped
     container_name: geoserver4${COMPOSE_PROJECT_NAME}
     stdin_open: true
@@ -156,7 +156,7 @@ services:
     
 
   data-dir-conf:
-    image: geosolutionsit/geoserver_data:2.12.x
+    image: geosolutionsit/geoserver_data:2.13.x
     restart: on-failure
     container_name: gsconf4${COMPOSE_PROJECT_NAME}
     labels:
